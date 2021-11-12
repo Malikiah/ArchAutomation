@@ -16,9 +16,9 @@ From initial Prompt type the following commands:
 
 ```
 pacman -Sy git
-git clone https://github.com/ChrisTitusTech/ArchTitus
+git clone https://github.com/ChrisTitusTech/ArchAutomation
 cd ArchAutomation
-./archtitus.sh
+./ArchAutomation.sh
 ```
 
 ### System Description
