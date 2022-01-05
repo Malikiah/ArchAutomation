@@ -4,6 +4,11 @@ echo "Setting up mirrors for optimal download          "
 echo "-------------------------------------------------"
 pacman -S --noconfirm pacman-contrib curl
 pacman -S --noconfirm reflector rsync
+sed -i 's/#[multilib]/[multilib]/g' /etc/pacman.conf
+sed -i 's/#Include = \/etc\/pacman.d\/mirrorlist/Include = \/etc\/pacman.d\/mirrorlist/g' /etc/pacman.conf
+sudo mkdir ~/.fonts/ && cd ~/.fonts/
+wget https://support.steampowered.com/downloads/1974-YFKL-4947/SteamFonts.zip
+unzip SteamFonts.zip && rm SteamFonts.zip
 
 echo -e "\nInstalling Base System\n"
 
@@ -26,6 +31,8 @@ PKGS=(
 'bluez'
 'bluez-libs'
 'bluez-utils'
+'blueman'
+'dmenu'
 'code' # Visual Studio code
 'base'
 'base-devel'
@@ -121,7 +128,6 @@ YAYPKGS=(
 'polybar-git'
 'haskell-dbus'
 'appimagelauncher'
-'ledger-live-bin'
 'nerd-fonts-complete'
 )
 
@@ -170,3 +176,10 @@ echo "--------------------------------------"
 echo "--          Bluetooth Setup         --"
 echo "--------------------------------------"
 sudo systemctl enable --now bluetooth
+
+echo "--------------------------------------"
+echo "--          Font Setup         --"
+echo "--------------------------------------"
+sudo mkdir ~/.fonts/ && cd ~/.fonts/
+wget https://support.steampowered.com/downloads/1974-YFKL-4947/SteamFonts.zip
+unzip SteamFonts.zip && rm SteamFonts.zip
