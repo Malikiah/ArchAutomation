@@ -52,6 +52,7 @@ PKGS=(
 'gwenview'
 'htop'
 'jdk-openjdk' # Java 17
+'stow'
 'kitty'
 'linux'
 'linux-firmware'
