@@ -111,18 +111,10 @@ PKGS=(
 'xf86-video-fbdev'
 'bitwarden'
 'imagemagick'
-'ghc'
+'stack'
 )
 
-for PKG in "${PKGS[@]}"; do
-    echo "INSTALLING: ${PKG}"
-    sudo pacman -S "$PKG" --noconfirm --needed
-done
-
-git clone https://aur.archlinux.org/yay-git.git
-cd yay && makepkg -Si
-
-YAYPKGS=( 
+AURAPKGS=( 
 'brave-bin'
 'steam'
 'haskell'
@@ -130,13 +122,31 @@ YAYPKGS=(
 'haskell-dbus'
 'appimagelauncher'
 'nerd-fonts-complete'
+'cabal-install-bin'
+'ghc'
 )
 
-for YAYPKG in "${YAYPKGS[@]}"; do
-    echo "INSTALLING: ${YAYPKG}"
-    yay -Sy "$PKG" --noconfirm --needed
+STACKPKGS=(
+	'cabal-install'
+)
+
+git clone https://github.com/fosskers/aura.git
+cd aura-bin && makepkg && sudo pacman -U *.zst
+
+for PKG in "${PKGS[@]}"; do
+    echo "INSTALLING: ${PKG}"
+    sudo pacman -S "$PKG" --noconfirm --needed
 done
 
+for AURAPKG in "${AURAPKGS[@]}"; do
+    echo "INSTALLING: ${AURAPKG}"
+    aura -A "$PKG" --noconfirm
+done
+
+for STACKPKG in "${STACKPKGS[@]}"; do
+	echo "stack installing: ${STACKPKG}"
+	stack install "$STACKPKG"
+done
 #
 # determine processor type and install microcode
 # 
